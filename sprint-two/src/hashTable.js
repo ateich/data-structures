@@ -5,48 +5,37 @@ var HashTable = function(){
 
 HashTable.prototype.insert = function(k, v){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  console.log("hash: " + i + "VALUE: " + v);
-
-  //if that key already exists at that index path
-  //check around it +1 each time
-  //forloop (keepchecking for empty spot until the limit)
-  this._storage[i] = v;
+  var o = {};
+  o.val = v;
+  o.key = k;
+  if(Array.isArray(this._storage[i])){
+    this._storage[i].push(o);
+  } else {
+    this._storage[i] = [o];
+  }
 };
 
 HashTable.prototype.retrieve = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  return this._storage[i];
+  for(var j = 0; j < this._storage[i].length; j++){
+    if(this._storage[i][j] && this._storage[i][j].key === k){
+      return this._storage[i][j].val;
+    }
+  }
+  return null;
 };
 
 HashTable.prototype.remove = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  this._storage[i] = null;
-};
-
-//take hash as param
-//check if storage[hash] contains key
-//if YES
-//  return hash
-//if NO
-//  check hash+1 and repeat until found
-//  return index
-
-HashTable.prototype._collisionResolution = function(k, v, isInsert){
-  var i = getIndexBelowMaxForKey(k, this._limit);
-
-  for(var j=0; j<this._limit-i; j++){
-    if(!this._storage[i+j]){
-      this._storage[i+j] = v;
-      return true;
+  for (var j = 0; j < this._storage[i].length; j++){
+    if(this._storage[i][j].key === k){
+      this._storage[i][j] = null;
     }
   }
-
-  //Double size of array and call this method again
-
-}
-
+};
 
 
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+
