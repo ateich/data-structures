@@ -41,4 +41,11 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
+  it('should have links from node to parent', function(){
+    tree.addChild(1);
+    tree.children[0].addChild(2);
+    expect(tree.children[0].children[0].parent.value).to.equal(1);
+    expect(tree.children[0].parent).to.equal(null);
+  });
+
 });
