@@ -8,12 +8,10 @@ HashTable.prototype.insert = function(k, v){
 
   //collision detection
   //  call retrieve
-  //  if returns value
-  //    we will have a collision
-  //    if returns obj
-  //      push to object new obj {key: v}
-  //    else
-  //      make obj {old_key:old_val, key:v}
+  //  if !returns array
+  //    add emtpy array
+  //
+  //  push {k:v} to array
 
   //Check for doubling
 };
