@@ -4,7 +4,6 @@ var Graph = function(){
 };
 
 Graph.prototype.addNode = function(newNode, toNode){
-  console.log(this.nodes);
   this.nodes[newNode] = {};
 
   if(!toNode){
