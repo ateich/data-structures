@@ -6,9 +6,6 @@ var makeTree = function(value){
   return newTree;
 };
 
-
-
-
 var treeMethods = {};
 
 treeMethods.addChild = function(value){
@@ -19,16 +16,11 @@ treeMethods.addChild = function(value){
 };
 
 treeMethods.contains = function(target){
-  //check the current parent and its children for this value
-  //if the parent does not have the target
-  //  iteratre through children and repeat
-
-  //debugger;
   if(this.value === target){
     return true;
   } else if(this.size() > 0) {
-    for(var i=0; i<this.size(); i++){
-      if(this.children[i].contains(target)){
+    for(var key in this.children){
+      if(this.children[key].contains(target)){
         return true;
       }
     }
@@ -40,6 +32,23 @@ treeMethods.size = function(){
   return Object.keys(this.children).length;
 };
 
+treeMethods.removeFromParent = function(){
+  var parent = this.parent;
+  for(var key in parent.children){
+    if(this === parent.children[key]){
+      delete parent.children[key];
+      this.parent = null;
+    }
+  }
+};
+
+treeMethods.traverse = function(callback){
+  callback(this);
+
+  for(var key in this.children){
+    this.children[key].traverse(callback);
+  }
+};
 
 /*
  * Complexity: What is the time complexity of the above functions?
