@@ -52,4 +52,17 @@ describe('linkedList', function() {
   });
 
   // add more tests here to test the functionality of linkedList
+  it('should add a node to the head of the list', function(){
+    linkedList.addToTail(2);
+    linkedList.addToTail(3);
+    linkedList.addToHead(1);
+    expect(linkedList.removeHead()).to.equal(1);
+  });
+
+  it('should remove the tail of the list', function(){
+    linkedList.addToTail(1);
+    linkedList.addToTail(2);
+    expect(linkedList.removeTail()).to.equal(2);
+  });
+
 });
