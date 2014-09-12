@@ -4,27 +4,48 @@ var makeBinarySearchTree = function(value){
   node.right;
   node.value = value;
   node.maxDepth = 0;
+  node.parent = null;
   return node;
 };
 
 var treeMethods = {};
 
 treeMethods.insert = function(value){
+  var currentDepth = 1;
   if(value > this.value){
     if(this.right){ //means it exists
-      this.right.insert(value);
+      currentDepth += this.right.insert(value);
     } else {
       this.right =  makeBinarySearchTree(value);
+      this.right.parent = this;
     }
   }
 
   if(value < this.value){
     if(this.left) {
-      this.left.insert(value);
+      currentDepth += this.left.insert(value);
     } else {
       this.left = makeBinarySearchTree(value);
+      this.left.parent = this;
     }
   }
+
+  //compare currentDepth > maxDepth
+  //if true, compare against log(n) and determine whether or not to balance
+  //if so, call balance function;
+};
+treeMethods.getSize = function(){
+  var counter = 0;
+
+  if(this.left){
+    counter+= this.left.getSize();
+  }
+  if(this.right){
+    counter+= this.right.getSize();
+  }
+
+  counter++;
+  return counter;
 };
 
 treeMethods.contains = function(value){
@@ -48,19 +69,6 @@ treeMethods.depthFirstLog = function(callback){
   }
 };
 
-treeMethods.getSize = function(){
-  var counter = 0;
-
-  if(this.left){
-    counter+= this.left.getSize();
-  }
-  if(this.right){
-    counter+= this.right.getSize();
-  }
-
-  counter++;
-  return counter;
-};
 
 treeMethods.breadthFirstLog = function(){
   //create queue
