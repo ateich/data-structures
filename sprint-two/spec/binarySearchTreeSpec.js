@@ -34,7 +34,18 @@ describe('binarySearchTree', function() {
     binarySearchTree.insert(2);
     binarySearchTree.insert(3);
     binarySearchTree.depthFirstLog(func);
-    console.log(array);
     expect(array).to.eql([5,2,3]);
   });
+
+  /*
+  it('should search breadth first', function(){
+    console.log("started breadth tree test");
+    binarySearchTree.insert(10);
+    binarySearchTree.insert(20);
+    binarySearchTree.insert(30);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(8);
+    binarySearchTree.breadthFirstLog();
+    //expect(binarySearchTree.left.value)
+  });*/
 });
