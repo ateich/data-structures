@@ -60,3 +60,41 @@ MakeBloom.prototype.hash3 = function(str){
   }
   return hash % this.bits.length;
 };
+
+MakeBloom.prototype.test = function(){
+  this.add('bob');
+  this.add('janet');
+  this.add('john');
+  this.add('steve');
+
+  this.add('test');
+  this.add('ball');
+  this.add('pc');
+  this.add('hr');
+
+  var actualPositives = 4;
+  var returnedPositives = 0;
+
+  for(var i = 0; i< 100000; i++){
+    var found;
+
+    if(i === 1){
+      found = this.query('bob');
+    } else if(i===100){
+      found = this.query('janet');
+    } else if(i===400){
+      found = this.query('john');
+    } else if (i === 900){
+      found = this.query('steve');
+    } else {
+      found = this.query(i);
+    }
+
+    if(found){
+      returnedPositives++;
+    }
+  }
+  //(1- e^(-kn/m))^k) k=3 m=18 n=8 (1- e^(-3*8/18))^3)
+
+  console.log('Actual is ' + actualPositives + ' Returned ' + returnedPositives);
+}
