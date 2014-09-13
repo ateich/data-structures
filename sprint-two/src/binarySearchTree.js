@@ -1,4 +1,4 @@
-var makeBinarySearchTree = function(value){
+ var makeBinarySearchTree = function(value){
   var node = Object.create(treeMethods);
   node.left;
   node.right;
