@@ -30,6 +30,17 @@ treeMethods.insert = function(value){
     }
   }
 
+  if(this.parent){
+    return currentDepth;
+  }
+
+  if(currentDepth > this.maxDepth){
+    this.maxDepth = currentDepth;
+    if(this.maxDepth > Math.log(this.getSize()) * 2){
+      console.log("Tree is rebalancing");
+      this.rebalanceTree();
+    }
+  }
   //compare currentDepth > maxDepth
   //if true, compare against log(n) and determine whether or not to balance
   //if so, call balance function;
@@ -87,6 +98,47 @@ treeMethods.breadthFirstLog = function(){
     queue.shift();
     //repeat on next queued item
   }
+};
+
+treeMethods.rebalanceTree = function(){
+  var treeValues = [];
+  if(this.left){
+    return treeValues.concat(this.left.rebalanceTree());
+  }
+
+  if(!this.parent){
+    return this.value;
+  }
+  else{
+    console.log(treeValues);
+  }
+
+  if(this.right){
+    return treeValues.concat(this.right.rebalanceTree());
+  }
+
+  //by now, we should have a filled sorted array
+
+
+  //if has left node, recurse left
+  //push this to treeValues
+  //if has right node, recurse right
+
+
+  //'flatten' tree
+  //if(left)
+  //go left all the way
+  //if end, go right
+  //gets recurised
+  //
+  //push top node
+  //
+  //if(right)
+  //
+  //
+  //get center
+  //place left right
+  //get center of left right
 };
 /*
  * Complexity: What is the time complexity of the above functions?
